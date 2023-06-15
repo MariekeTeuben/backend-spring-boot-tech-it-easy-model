@@ -1,30 +1,31 @@
 package org.techiteasy.demo.dtos;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 
-public class TelevisionDto {
-    public Long id;
-    public String type;
-    @NotBlank
-    public String brand;
-    public String name;
-    public Double price;
-    public Double availableSize;
-    public Double refreshRate;
-    public String screenType;
-    public String screenQuality;
-    public Boolean smartTv;
-    public Boolean wifi;
-    public Boolean voiceControl;
-    public Boolean hdr;
-    public Boolean bluetooth;
-    public Boolean ambiLight;
-    public Integer originalStock;
-    public Integer sold;
+public class TelevisionInputDto {
 
-    public Long getId() {
-        return id;
-    }
+    @NotNull(message = "Type is required")
+    private String type;
+    @NotNull(message = "Brand is required")
+    private String brand;
+    @Size(max = 20, message = "Name must be between 0-20 characters")
+    private String name;
+    @Positive(message = "Price must be higher than zero")
+    private Double price;
+    private Double availableSize;
+    private Double refreshRate;
+    private String screenType;
+    private String screenQuality;
+    private Boolean smartTv;
+    private Boolean wifi;
+    private Boolean voiceControl;
+    @AssertTrue(message = "All televisions must be hdr minimum")
+    private Boolean hdr;
+    private Boolean bluetooth;
+    private Boolean ambiLight;
+    @PositiveOrZero(message = "Television cannot have negative stock")
+    private Integer originalStock;
+    private Integer sold;
 
     public String getType() {
         return type;
@@ -88,10 +89,6 @@ public class TelevisionDto {
 
     public Integer getSold() {
         return sold;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setType(String type) {
@@ -158,3 +155,5 @@ public class TelevisionDto {
         this.sold = sold;
     }
 }
+
+
